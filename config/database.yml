@@ -6,14 +6,14 @@ default: &default
   password: password
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-development:
+development: &development
   <<: *default
-  database: ifeelgood_test_development
+  database: ifeelgood_development
   port: 5440
 
 test:
-  <<: *default
-  database: ifeelgood_test_test
+  <<: *development
+  database: ifeelgood_test
 
 production:
   <<: *default
