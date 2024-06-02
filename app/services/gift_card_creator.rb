@@ -16,10 +16,10 @@ class GiftCardCreator
                                                          order_id:,
                                                          user: { email: recipient_email },
                                                          amount:)
-    debugger
+
     reward_codes = response['data']['reward_codes']
-    code = reward_codes['codes'].find { |code| code['name'] == PRIMARY_CODE_KEY }
-    security_code = reward_codes['codes'].find { |code| code['name'] == SECURITY_CODE_KEY }
+    code = reward_codes['codes'].find { |code| code['name'] == PRIMARY_CODE_KEY }['value']
+    security_code = reward_codes['codes'].find { |code| code['name'] == SECURITY_CODE_KEY }['value']
     GiftCard.create!(order_id:,
                      code:,
                      security_code:,
