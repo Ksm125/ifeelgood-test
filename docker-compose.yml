@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   server:
     build:
@@ -7,11 +5,34 @@ services:
       dockerfile: Dockerfile
     environment:
       RAILS_ENV: development
+    ports:
+      - "3000:3000"
     volumes:
       - .:/app
+      - /app/ifeelgood-ui
     depends_on:
       db:
         condition: service_healthy
+    command:
+      - sh
+      - -c
+      - |
+        rm -f tmp/pids/server.pid
+        bundle install
+        bundle exec rails db:create db:migrate
+        bundle exec rails s -b '0.0.0.0'
+  ui:
+    build:
+      dockerfile: Dockerfile
+      target: npm-dev
+      context: ./ifeelgood-ui
+    stdin_open: true
+    tty: true
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./ifeelgood-ui:/app
+    command: npm run dev -- --host
   db:
     image: postgres:14.8-alpine
     restart: unless-stopped
