@@ -7,4 +7,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  namespace :api, defaults: { format: :json } do
+    api_version(module: "Version1", path: { value: "v1" }) do
+      resources :gift_cards, only: [:index, :show, :create, :update, :destroy]
+    end
+  end
 end
