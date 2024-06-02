@@ -4,6 +4,8 @@ module Api
   module Version1
     # Base controller for API version 1
     class BaseController < ApplicationController
+      skip_forgery_protection
+
       include Pagy::Backend
 
       protected

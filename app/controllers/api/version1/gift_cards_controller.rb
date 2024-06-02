@@ -9,7 +9,7 @@ module Api
       end
 
       def create
-        gift_card = GiftCardCreator.create_gift_card_for!(**gift_card_params)
+        gift_card = GiftCardCreator.create_gift_card_for!(**gift_card_params.to_h.symbolize_keys)
         render_json gift_card, status: :created
       end
 
@@ -17,7 +17,7 @@ module Api
       private
 
       def gift_card_params
-        params.require(:gift_card).permit(:promotion_id, :reward_sku, :recipient_email, :amount)
+        params.permit(:promotion_id, :reward_sku, :recipient_email, :amount)
       end
     end
   end

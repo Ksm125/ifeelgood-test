@@ -4,7 +4,11 @@ class GiftCardCreator
   PRIMARY_CODE_KEY = 'Primary Code'
   SECURITY_CODE_KEY = 'Security Code'
 
-  def self.create_gift_card_for!(promotion_id:, reward_sku:, recipient_email:, amount:)
+  # @param promotion_id [String] the promotion id
+  # @param reward_sku [String] the reward sku
+  # @param recipient_email [String] the recipient email
+  # @param amount [Integer] the amount. Default is nil which means the amount is set to the reward value
+  def self.create_gift_card_for!(promotion_id:, reward_sku:, recipient_email:, amount: nil)
     fulfillment = Fulfillment.new
     order_id = "order_#{SecureRandom.uuid}"
     response = fulfillment.create_and_redeem_redemption!(promotion_id,
