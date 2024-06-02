@@ -17,7 +17,7 @@ module Api
       private
 
       def gift_card_params
-        params.require(:gift_card).permit(:promotion_id, :reward_sku, :user_email, :amount)
+        params.require(:gift_card).permit(:promotion_id, :reward_sku, :recipient_email, :amount)
       end
     end
   end
