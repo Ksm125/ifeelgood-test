@@ -1,6 +1,7 @@
 # README
 
 To run the project, you'll need to set the environment variables `API_KEY` and `API_SECRET` with your API key and secret.
+Duplicate the file `.env.example` and name it to `.env` then update the value of the environment variables.
 
 To easily run the project, you can use the `docker-compose` file provided. To do so, run the following command:
 
